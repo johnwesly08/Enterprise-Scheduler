@@ -1,0 +1,11 @@
+# Application Environment
+ENV=dev
+
+# Flask Secret Key
+SECRET_KEY=replace-this-with-a-secure-random-string
+
+# Database (SQLite - default & universal)
+DATABASE_URL=sqlite:///scheduler.db
+
+# Optional: Flask Debug Mode
+FLASK_DEBUG=1
