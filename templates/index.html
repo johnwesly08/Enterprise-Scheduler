@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-lg-8">
+        <h1 class="fw-bold tracking-tight mb-2">Systems Overview</h1>
+        <p class="text-secondary lead">Global status of scheduled events and resource distribution.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end pt-3">
+        <a href="{{ url_for('report') }}" class="btn btn-primary">
+            <i class="fa-solid fa-file-export me-2"></i>Generate Audit
+        </a>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">ACTIVE EVENTS</h6>
+            <div class="h2 fw-bold mb-0">248</div>
+            <div class="mt-2 small text-success"><i class="fa-solid fa-arrow-up"></i> 12% increase</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">RESOURCE LOAD</h6>
+            <div class="h2 fw-bold mb-0">82%</div>
+            <div class="progress mt-3" style="height: 4px; background: var(--glass-border);">
+                <div class="progress-bar bg-primary" style="width: 82%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">SYSTEM CONFLICTS</h6>
+            <div class="h2 fw-bold mb-0 text-danger">0</div>
+            <div class="mt-2 small text-muted">All clear</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">PENDING APPROVALS</h6>
+            <div class="h2 fw-bold mb-0">14</div>
+            <div class="mt-2 small text-muted">Awaiting sync</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card h-100 border-0 overflow-hidden">
+            <div class="card-header bg-transparent border-bottom py-3 px-4 fw-bold">Latest Allocations</div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Resource</th>
+                                <th>Assigned To</th>
+                                <th>Status</th>
+                                <th class="pe-4 text-end">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4 fw-semibold">Conference Room A</td>
+                                <td>Dev Ops Team</td>
+                                <td><span class="badge rounded-pill bg-primary-subtle text-primary">Active</span></td>
+                                <td class="pe-4 text-end text-secondary small">Just now</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4 fw-semibold">Mobile Lab Unit</td>
+                                <td>QA Department</td>
+                                <td><span class="badge rounded-pill bg-secondary-subtle text-secondary">Awaiting</span></td>
+                                <td class="pe-4 text-end text-secondary small">14m ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card bg-primary text-white p-4 h-100 border-0">
+            <h5 class="fw-bold mb-3">Intelligent Scheduling</h5>
+            <p class="opacity-75 small mb-4">Our algorithm automatically detects and prevents resource overlaps across departments.</p>
+            <div class="d-grid gap-2">
+                <a href="{{ url_for('allocations') }}" class="btn btn-light fw-bold">Create New Task</a>
+                <a href="{{ url_for('resources') }}" class="btn btn-outline-light">Audit Inventory</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!-- The Above code is how the real time running application looks like. Followed by this, the code below is the actual complete DB based UI-->
+
+<!-- {% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mb-5">
+    <div class="col-lg-8">
+        <h1 class="fw-bold mb-2">Systems Overview</h1>
+        <p class="text-secondary lead">
+            Global status of scheduled events and resource distribution.
+        </p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">ACTIVE EVENTS</h6>
+            <div class="h2 fw-bold mb-0">{{ active_events }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">RESOURCE LOAD</h6>
+            <div class="h2 fw-bold mb-0">{{ resource_load }}%</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">SYSTEM CONFLICTS</h6>
+            <div class="h2 fw-bold mb-0">{{ conflicts_count }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-4 border-0">
+            <h6 class="text-secondary fw-bold small mb-3">PENDING APPROVALS</h6>
+            <div class="h2 fw-bold mb-0">{{ pending_approvals }}</div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+ -->

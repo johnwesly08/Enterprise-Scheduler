@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Utilization Report{% endblock %}
+
+{% block content %}
+<h2>Resource Utilization Report</h2>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" 
+                           name="start_date" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" 
+                           name="end_date" required>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Generate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if show_results %}
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h5>Report: {{ start_date.strftime('%Y-%m-%d') }} to {{ end_date.strftime('%Y-%m-%d') }}</h5>
+    </div>
+    <div class="card-body">
+        {% if report_data %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Resource</th>
+                        <th>Type</th>
+                        <th>Total Hours Utilized</th>
+                        <th>Upcoming Bookings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in report_data %}
+                    <tr>
+                        <td><strong>{{ item.resource.resource_name }}</strong></td>
+                        <td><span class="badge bg-primary">{{ item.resource.resource_type }}</span></td>
+                        <td>{{ item.total_hours }} hours</td>
+                        <td>
+                            {% if item.upcoming_bookings %}
+                                <ul class="list-unstyled mb-0">
+                                    {% for booking in item.upcoming_bookings %}
+                                    <li>
+                                        <small>
+                                            {{ booking.title }} - 
+                                            {{ booking.start_time.strftime('%Y-%m-%d %H:%M') }}
+                                        </small>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No resource utilization data for this period.</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

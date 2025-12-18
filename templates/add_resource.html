@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Add Resource{% endblock %}
+
+{% block content %}
+<h2>Add New Resource</h2>
+<div class="card mt-4">
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="resource_name" class="form-label">Resource Name</label>
+                <input type="text" class="form-control" id="resource_name" 
+                       name="resource_name" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="resource_type" class="form-label">Resource Type</label>
+                <select class="form-select" id="resource_type" name="resource_type" required>
+                    <option value="">Choose...</option>
+                    <option value="room">Room</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="equipment">Equipment</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Create Resource</button>
+                <a href="{{ url_for('resources') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

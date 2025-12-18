@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Allocations - Event Scheduler{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Resource Allocations</h2>
+    <a href="{{ url_for('add_allocation') }}" class="btn btn-success">+ Add New Allocation</a>
+</div>
+
+{% if allocations %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Event</th>
+                <th>Resource</th>
+                <th>Type</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allocation in allocations %}
+            <tr>
+                <td>{{ allocation.allocation_id }}</td>
+                <td><strong>{{ allocation.event.title }}</strong></td>
+                <td>{{ allocation.resource.resource_name }}</td>
+                <td><span class="badge bg-primary">{{ allocation.resource.resource_type }}</span></td>
+                <td>
+                    {{ allocation.event.start_time.strftime('%Y-%m-%d %H:%M') }} - 
+                    {{ allocation.event.end_time.strftime('%H:%M') }}
+                </td>
+                <td>
+                    <a href="{{ url_for('delete_allocation', allocation_id=allocation.allocation_id) }}" 
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Remove this allocation?')">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    No allocations found. <a href="{{ url_for('add_allocation') }}">Create your first allocation</a>
+</div>
+{% endif %}
+{% endblock %}

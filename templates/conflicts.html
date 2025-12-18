@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Conflicts - Event Scheduler{% endblock %}
+
+{% block content %}
+<h2>Conflict Detection</h2>
+
+{% if conflicts %}
+<div class="alert alert-warning mt-4">
+    <strong>Warning!</strong> {{ conflicts|length }} conflict(s) detected.
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="table-danger">
+            <tr>
+                <th>Conflicting Events</th>
+                <th>Resource</th>
+                <th>Time Overlap</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for conflict in conflicts %}
+            <tr>
+                <td>
+                    <strong>Event 1:</strong> {{ conflict.event1.title }}<br>
+                    <strong>Event 2:</strong> {{ conflict.event2.title }}
+                </td>
+                <td>
+                    {{ conflict.resource.resource_name }}
+                    <span class="badge bg-primary">{{ conflict.resource.resource_type }}</span>
+                </td>
+                <td>
+                    <strong>Event 1:</strong> 
+                    {{ conflict.event1.start_time.strftime('%Y-%m-%d %H:%M') }} - 
+                    {{ conflict.event1.end_time.strftime('%H:%M') }}<br>
+                    <strong>Event 2:</strong> 
+                    {{ conflict.event2.start_time.strftime('%Y-%m-%d %H:%M') }} - 
+                    {{ conflict.event2.end_time.strftime('%H:%M') }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-success mt-4">
+    <strong>Great!</strong> No conflicts detected in your schedule.
+</div>
+{% endif %}
+
+<a href="{{ url_for('allocations') }}" class="btn btn-primary mt-3">Back to Allocations</a>
+{% endblock %}
